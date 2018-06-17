@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Designs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <link href="~/Contents/jquery.fancybox/jquery.fancybox.css" rel="stylesheet" />
+}
+
+@*<div style="text-align:center;font-size:3em;height:350px;line-height:300px;">页面升级，敬请期待...</div>*@
+
+<div style="width: 100%;text-align: center;margin-bottom: 60px;min-height: 200px;">
+    <div style="max-width: 1200px;margin: auto;margin-top: 20px;min-height: 360px;">
+        <div class="row" id="imgcontain">
+            @foreach (var item in ViewBag.list)
+            {
+                <div class="col-sm-3" style="margin-bottom:30px;">
+                    <a class="fancybox-img" rel="fancybox-thumb" href="@item" title="">
+                        <img src="@item" alt="" style="width:100%;height:100%;max-height:406px;overflow-y:hidden;" />
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Contents/jquery.fancybox/jquery.fancybox.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setMenu(5);
+            init();
+        })
+
+        function init() {
+            $(".fancybox-img").fancybox({
+                prevEffect: 'none',
+                nextEffect: 'none',
+                helpers: {
+                    title: {
+                        type: 'outside'
+                    },
+                    thumbs: {
+                        width: 50,
+                        height: 50
+                    }
+                }
+            });
+        }
+    </script>
+}

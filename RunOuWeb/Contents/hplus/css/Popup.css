@@ -1,0 +1,96 @@
+﻿@media (min-width:768px) {
+    .modal-width300 {
+        width: 300px;
+    }
+}
+
+@media (min-width:768px) {
+    .modal-width400 {
+        width: 400px;
+    }
+}
+
+@media (min-width:768px) {
+    .modal-width500 {
+        width: 500px;
+    }
+}
+
+@media (min-width:768px) {
+    .modal-width600 {
+        width: 600px;
+    }
+}
+
+@media (min-width:992px) {
+    .modal-width700 {
+        width: 700px;
+    }
+}
+
+@media (min-width:992px) {
+    .modal-width800 {
+        width: 800px;
+    }
+}
+
+@media (min-width:992px) {
+    .modal-width900 {
+        width: 900px;
+    }
+}
+
+@media (min-width:1200px) {
+    .modal-width1000 {
+        width: 1000px;
+    }
+}
+
+@media (min-width:1200px) {
+    .modal-width1100 {
+        width: 1100px;
+    }
+}
+
+@media (min-width:1200px) {
+    .modal-width1200 {
+        width: 1200px;
+    }
+}
+/*"*"号提示*/
+.red {
+    color: #FF0000 !important;
+}
+/*弹出框样式*/
+.sweet-alert {
+    width: 400px;
+    padding: 0px;
+    padding-bottom:20px;
+}
+
+.sweet-alert h2 {
+    margin: 15px 0;
+    font-size: 15px;
+    line-height: 30px;
+}
+.sweet-alert p { 
+    font-size: 12px; 
+}
+
+/*.sweet-alert .sa-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin: 10px auto;
+}
+.sweet-alert .sa-icon.sa-warning .sa-body 
+{
+    height:20px;
+}*/
+
+.sweet-alert button {
+    font-size: 12px;
+    padding: 7px 25px;
+    margin: 20px 10px 0 10px;
+}
+

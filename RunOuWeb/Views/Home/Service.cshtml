@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "我们的服务";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <style>
+        .oem-process label {background: url(~/Contents/images/cicle.png);background-size: 80px 80px;height: 80px;width: 80px;line-height: 78px;}
+    </style>    
+}
+
+@if (ViewBag.t == 1)
+{
+    <div style="width: 100%;text-align: center;margin-bottom: 120px;min-height: 200px;">
+        <h2>ODM定制服务流程</h2>
+        <div class="oem-process" style="margin-top: 50px;text-align: center;">
+            <label>需求洽谈</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>调研分析</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>设计确认</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>打样确认</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>启动生产</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>质量检测</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>包装发货</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>售后服务</label>
+        </div>
+    </div>
+}
+else
+{
+    <div style="width: 100%;text-align: center;margin-bottom: 120px;min-height: 200px;">
+        <h2>OEM定制服务流程</h2>
+        <div class="oem-process" style="margin-top: 50px;text-align: center;">
+            <label>需求洽谈</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>调研分析</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>来样设计</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>打样确认</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>启动生产</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>质量检测</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>包装发货</label>
+            <img src="~/Contents/images/arrowright.png" style="width: 40px;">
+            <label>售后服务</label>
+        </div>
+    </div>
+}
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setMenu(3);
+        })
+    </script>
+}

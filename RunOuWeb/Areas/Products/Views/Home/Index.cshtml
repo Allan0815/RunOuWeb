@@ -1,0 +1,214 @@
+﻿@{
+    ViewBag.Nav = new string[] { "产品管理", "产品列表" };
+    Layout = "~/Views/Shared/_LayoutM.cshtml";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox-content m-b-sm border-bottom">
+            <form id="toolbar">
+                <div class="form-inline" style="line-height:40px;">
+                    <div class="form-group">
+                        <input id="SearchKey" name="SearchKey" type="text" placeholder="请输入产品名称" class="form-control" style="width:200px;">
+                        <button type="button" class="btn btn-sm btn-success" onclick="list();"><i class="fa fa-search"></i>&nbsp;搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="ibox-content m-b-sm border-bottom">
+            <table id="roletable" style="table-layout:fixed;"></table>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        var tb;
+        $(document).ready(function(){
+            init();
+            list();
+        })
+
+        function init()
+        {
+            
+        }
+
+        function list()
+        {
+            var columns = [
+
+            {
+                field: 'id',
+                width: '30',
+                title: '<input class="chkall" type="checkbox" onclick="checkOrder" />',
+                formatter: function (idx, data) {//自定义列
+                    return '<input class="chkitem" type="checkbox" value="' + data.tempid + '" />';
+                }
+            }, {
+                field: 'no',
+                width:'120',
+                title: '单号',
+                formatter: function (idx, data) {//自定义列
+                    return '<a href="javascript:;" onclick="showdetail('+data.id+',\''+data.no+'\')">' + data.no + '</a>';
+                }
+            }, {
+                field: 'planno',
+                width: '110',
+                title: '计划单号',
+            }, {
+                field: 'isurgency',
+                width: '110',
+                title: '是否紧急',
+                formatter: function (value, row, index) {
+                    if (value == '紧急') {
+                        return '<span class="badge badge-danger">紧急</span>';
+                    }
+                    else {
+                        return value;
+                    }
+                }
+            }, {
+                field: 'ispush',
+                width: '100',
+                title: '甲油推送'
+            }, {
+                field: 'buycategoryname',
+                width: '100',
+                title: '采购类型'
+            },  {
+                field: 'timestr',
+                width: '220',
+                title: '下单时间/到货预期'
+            }, {
+                field: 'parentno',
+                width: '100',
+                title: '父级采购单'
+            }, {
+                field: 'ChildrenOrders',
+                width: '100',
+                title: '关联子单'
+            }, {
+                field: 'status',
+                width: '70',
+                title: '状态'
+            }, {
+                field: 'departmentname',
+                width: '100',
+                title: '部门'
+            }, {
+                field: 'isallot',
+                width: '70',
+                title: '是否调拨'
+            }, {
+                field: 'warehouse_fromname',
+                width: '100',
+                title: '仓库'
+            }, {
+                field: 'warehouse_toname',
+                width: '100',
+                title: '调拨仓库'
+            }, {
+                field: 'parentsuppliername',
+                width: '200',
+                title: '一级供应商'
+            }, {
+                field: 'suppliername',
+                width: '200',
+                title: '二级供应商'
+            }, {
+                field: 'buyusername',
+                width: '60',
+                title: '采购员'
+            }, {
+                field: 'paycompanyname',
+                width: '100',
+                title: '付款主体'
+            }, {
+                field: 'buyamount',
+                width: '100',
+                title: '采购不含税'
+            }, {
+                field: 'paystatus',
+                width: '70',
+                title: '支付状态'
+            }, {
+                field: 'sendstatus',
+                width: '70',
+                title: '发货状态'
+            }, {
+                field: 'arrivalstatus',
+                width: '70',
+                title: '到货状态'
+            }, {
+                field: 'qcstatus',
+                width: '70',
+                title: '质检状态'
+            }, {
+                field: 'putinstatus',
+                width: '70',
+                title: '入库状态'
+            }, {
+                field: 'taobaoorderno',
+                width: '140',
+                title: '1688/淘宝订单号'
+            }, {
+                field: 'createusername',
+                width: '60',
+                title: '创建人'
+            }, {
+                title: '操作',
+                width: '60',
+                formatter: function (idx, data) {
+                    return '<a class="btn btn-success btn-xs" href="javascript:;" onclick="showdetail(' + data.id + ',"'+data.no+'")">详情</a>';
+                }
+            }
+            ];
+
+            var url = '@Url.Content("~/Purchase/Home/List")' + '?' + $("#toolbar").serialize()+'&t=@(ViewBag.t)';
+
+            if (tb == undefined) {
+                tb = GetBtTable_Exp("roletable", columns, url, "", true, "采购单列表", [], dblclick);
+            }
+            else {
+                tb.bootstrapTable('refresh', { url: url });
+            }
+        }
+
+        function showdetail(id,title)
+        {
+            layer_show(title != undefined ? '采购单'+title+'详情' : '采购单详情', "@Url.Content("~/Purchase/Home/Detail?id=")" + id, '90%');
+        }
+
+        function dblclick(row)
+        {
+            showdetail(row.id,row.no);
+        }
+
+        function checkOrder()
+        {
+            var arr = new Array();
+            $('.chkitem:checked').each(function () {
+                var val = $(this).val();
+                arr[arr.length] = val;
+            })
+
+            if (arr.length == 0)
+            {
+                layer.msg('请至少选择一个采购单！');
+                return;
+            }
+
+            layer.confirm("您确定要批量打印采购单吗？", {
+                title: '操作确认提醒',
+                area: ['400px'],
+                btn: ['确定', '取消']
+            }, function (index) {
+                layer_show('批量打印采购单', "@Url.Content("~/Purchase/Home/PrintOther?s=")" + arr.join('|'), '90%');
+                layer.close(index);
+            })
+
+        }
+
+    </script>
+}
+
+
