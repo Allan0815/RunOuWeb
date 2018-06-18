@@ -26,6 +26,14 @@
     <div class="border-bottom dropdown" style="position: fixed;width: 100%;z-index: 9;">
         <ul class="breadcrumb" style="padding: 10px 15px;">
             <li><a href="#">首页</a></li>
+            @if (ViewBag.Nav != null)
+            {
+                string[] navs = ViewBag.Nav as string[];
+                foreach (var item in navs)
+                {
+                    <li><a href="#">@item</a></li>
+                }
+            }
             <button class="btn btn-primary btn-sm pull-right" type="button" onclick="javascript:location = location;" title="刷新" style="margin-top:-6px;"><i class="fa fa-refresh"></i></button>
         </ul>
     </div>
@@ -36,6 +44,7 @@
     <script src="~/Contents/hplus/js/jquery.min.js?v=2.1.4"></script>
     <script src="~/Contents/hplus/js/bootstrap.min.js?v=3.3.6"></script>
     <script src="~/Contents/hplus/js/content.min.js?v=1.0.0"></script>
+    <script src="~/Contents/layer/2.4/layer.js"></script>
     <script src="~/Contents/js/common.js"></script>
     @RenderSection("scripts", required: false)
 </body>

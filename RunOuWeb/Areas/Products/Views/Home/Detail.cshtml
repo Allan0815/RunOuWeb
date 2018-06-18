@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Nav = new string[] { "产品管理", "产品列表", "产品详情" };
+    Layout = "~/Views/Shared/_LayoutM_Detail.cshtml";
+}
+
+<div style="background:#fff;padding:8px;margin:-15px;">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">产品编号</label>
+            <div class="col-sm-4">
+                <input id="txtNo" name="txtNo" type="text" class="form-control" />
+            </div>
+            <label class="col-sm-2 control-label">产品名称</label>
+            <div class="col-sm-4">
+                <input id="txtName" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">原价</label>
+            <div class="col-sm-4">
+                <input id="txtPrice" type="number" class="form-control" />
+            </div>
+            <label class="col-sm-2 control-label">零售价</label>
+            <div class="col-sm-4">
+                <input id="txtSalePrice" type="number" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">批发价</label>
+            <div class="col-sm-4">
+                <input id="txtBulkPrice" type="number" class="form-control" />
+            </div>
+            <label class="col-sm-2 control-label">库存</label>
+            <div class="col-sm-4">
+                <input id="txtCount" type="number" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top:10px;">产品属性</div>
+    <div class="row">
+        <div class="col-sm-12">
+            @foreach (var item in ViewBag.attrs)
+            {
+                <input id="chk@(item.id)" type="checkbox" value="@item.id" style="margin-left:8px;" onclick="chk(@item.id,'@item.name')" /><label for="chk@(item.id)">@item.name</label>
+            }
+        </div>
+        <div class="col-sm-12">
+            <table id="tb" class="table table-bordered">
+                
+            </table>
+        </div>
+    </div>
+    <div style="margin-top:10px;">产品图片</div>
+    <div class="row">
+        @*<div class="col-sm-2" id="col_id">
+            <img style="width:100%;padding:5px;border:solid 1px #eee;" src="~/Contents/images/gallery/gallery1.jpg" val="" />
+            <input type="radio" name="mainpic" />设为主图
+            <a href="javascript:;" class="btn btn-xs btn-danger">删除</a>
+        </div>*@
+        <div class="col-sm-2" style="text-align:center;" id="addpic">
+            <a id="btnupload" href="javascript:;" class="btn btn-xs btn-primary" style="margin-top:30px;">上传图片</a>
+        </div>
+    </div>
+    <div style="margin-top:10px;">产品详情</div>
+    <div>
+
+    </div>
+</div>
+
+@section css{
+    <link href="~/Contents/hplus/plugins/webuploader-0.1.5/webuploader.css" rel="stylesheet" />
+    <style>
+        .webuploader-pick {position: relative;display: block;cursor: pointer;background: none;padding: 0px;color: #fff;text-align: center;border-radius: 3px;overflow: hidden;}
+    </style>
+}
+
+
+
+
+@section scripts{
+    <script src="~/Contents/hplus/plugins/webuploader-0.1.5/webuploader.min.js"></script>
+    <script type="text/javascript">
+        var BASE_URL = '@(Url.Content("~/Contents/hplus/plugins/webuploader-0.1.5/"))';
+        $(document).ready(function () {
+            init();
+        })
+
+        function init()
+        {
+            uploadfile('btnupload', undefined, function (result) {
+                var str = '<div class="col-sm-2" id="col_' + result.id + '"><img style="width:100%;padding:5px;border:solid 1px #eee;" src="' + result.filepath.replace('~', '') + '" val="' + result.id + '" /><input type="radio" name="mainpic" val="' + result.id + '" />设为主图<a href="javascript:;" class="btn btn-xs btn-danger" onclick="delPic(' + result.id + ')">删除</a>';
+                $(str).insertBefore('#addpic');
+            });
+        }
+
+        function chk(id, title)
+        {
+            if ($('#tr' + id).length > 0)
+            {
+                layer.msg('已存在该属性！');
+                return false;
+            }
+
+            var s = '<tr id="tr' + id + '">' +
+                '<td>' + title + '</td>' +
+                '<td class="form-horizontal"><input id="p' + id + '" placeholder="如有多个可选值，可用“|”隔开" class="form-control" type="text" /><a href="javascript:;" onclick="delchk('+id+');" class="btn btn-xs btn-danger" style="margin-left:2px;">删除</a></td>';
+
+            $('#tb').append(s);
+        }
+
+        function delchk(id)
+        {
+            $('#tr' + id).remove();
+        }
+
+        function uploadfile(id, url, callback) {
+            var uploader = new WebUploader.Uploader({
+                // swf文件路径
+                swf: BASE_URL + '/js/Uploader.swf',
+                // 文件接收服务端。
+                server: url != undefined ? url : '@Url.Content("~/File/Upload")',
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#' + id,
+                // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                resize: false,
+                auto: true,
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                }
+            });
+
+            uploader.on('uploadSuccess', function (file, response) {
+                if (callback != undefined) {
+                    callback(response);
+                }
+            });
+
+            uploader.on('uploadError', function (file) {
+                layer.msg("上传出错");
+            });
+        }
+
+    </script>    
+    
+}

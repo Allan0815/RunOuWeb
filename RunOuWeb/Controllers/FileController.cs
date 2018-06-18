@@ -4,14 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using RunOuWeb.Models;
 using RO.Services;
 
 namespace RunOuWeb.Controllers
 {
     public class FileController : Controller
     {
-        // GET: File
+        [HttpPost]
         public JsonResult Upload()
         {
             var m = new RO.Model.mFile();
@@ -32,6 +31,7 @@ namespace RunOuWeb.Controllers
 
                 file.SaveAs(Server.MapPath(filepath + filename));
 
+                m.filetype = file.FileName.Split('.')[1];
                 m.filepath = filepath + filename;
 
                 m.id = new FileServices().Add(m);

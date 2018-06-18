@@ -43,6 +43,9 @@
     <Compile Include="BtTableParameter.cs" />
     <Compile Include="MenuModel.cs" />
     <Compile Include="mFile.cs" />
+    <Compile Include="Product\mAttribute.cs" />
+    <Compile Include="Product\mCondition.cs" />
+    <Compile Include="Product\mProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

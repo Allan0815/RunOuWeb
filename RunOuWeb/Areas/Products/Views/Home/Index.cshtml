@@ -8,6 +8,7 @@
             <form id="toolbar">
                 <div class="form-inline" style="line-height:40px;">
                     <div class="form-group">
+                        <a href="javascript:;" class="btn btn-sm btn-primary" onclick="showdetail(0)">新增产品</a>
                         <input id="SearchKey" name="SearchKey" type="text" placeholder="请输入产品名称" class="form-control" style="width:200px;">
                         <button type="button" class="btn btn-sm btn-success" onclick="list();"><i class="fa fa-search"></i>&nbsp;搜索</button>
                     </div>
@@ -173,9 +174,9 @@
             }
         }
 
-        function showdetail(id,title)
+        function showdetail(id)
         {
-            layer_show(title != undefined ? '采购单'+title+'详情' : '采购单详情', "@Url.Content("~/Purchase/Home/Detail?id=")" + id, '90%');
+            layer_show('产品详情', "@Url.Content("~/Products/Home/Detail?id=")" + id, '90%');
         }
 
         function dblclick(row)

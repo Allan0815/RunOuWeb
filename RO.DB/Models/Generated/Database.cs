@@ -137,6 +137,42 @@ namespace RO.DB
 
     
 
+	[TableName("runou.attribute_value")]
+
+
+
+	[PrimaryKey("id")]
+
+
+
+
+	[ExplicitColumns]
+
+    public partial class attribute_value : RODB.Record<attribute_value>  
+    {
+
+
+
+		[Column] public int id { get; set; }
+
+
+
+
+
+		[Column] public int attributeid { get; set; }
+
+
+
+
+
+		[Column] public string value { get; set; }
+
+
+
+	}
+
+    
+
 	[TableName("runou.attributes")]
 
 

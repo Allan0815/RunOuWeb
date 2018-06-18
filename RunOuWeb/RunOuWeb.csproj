@@ -152,12 +152,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\mFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Contents\css\animate.min.css" />
     <Content Include="Contents\css\bootstrap.min.css" />
+    <Content Include="Contents\css\common.css" />
     <Content Include="Contents\css\font-awesome.css" />
     <Content Include="Contents\css\font-awesome.min.css" />
     <Content Include="Contents\css\main.css" />
@@ -770,7 +770,6 @@
     <Folder Include="Areas\Products\Models\" />
     <Folder Include="Areas\Products\Views\Shared\" />
     <Folder Include="Contents\images\product\" />
-    <Folder Include="DB\" />
     <Folder Include="Views\File\" />
   </ItemGroup>
   <ItemGroup>
@@ -844,6 +843,7 @@
     <Content Include="Contents\hplus\js\plugins\layer\laydate-v1.1\layDate官网.url" />
     <Content Include="Contents\hplus\plugins\webuploader-0.1.5\README.md" />
     <Content Include="Areas\Products\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Products\Views\Home\Detail.cshtml" />
     <None Include="Properties\PublishProfiles\localhost.pubxml" />
     <Content Include="Views\Shared\_LayoutM_Detail.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
